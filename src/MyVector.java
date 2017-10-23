@@ -1,7 +1,7 @@
 public class MyVector {
     
-    private int[] v; // το διάνυσμα
-    private String label; // και η ετικέτα του
+    private int[] v;
+    private String label;
 	
     public MyVector(int dimension) {
         v = new int[dimension];
@@ -23,8 +23,16 @@ public class MyVector {
     public MyVector(MyVector otherVector) { //copy constructor
         label = otherVector.label;
         v = otherVector.v;       
+    }
+    
+    public MyVector(MyVector otherVector, String s) { //overloaded DEEP copy constructor
+        label = otherVector.label; //immutability of Strings saves us...
+        v = new int[otherVector.v.length];
+        for (int i = 0; i < v.length; i++) 
+            v[i] = otherVector.v[i];
         
     }
+    
 //
 // θα θέτει νέα ετικέτα label στο τρέχον διάνυσμα 
     public void setLabel(String l) {
@@ -123,10 +131,23 @@ public class MyVector {
         System.out.println("Copy of v1 is " + vector1Copy);
         
         System.out.println();
-        System.out.println("Using setValue to change v1 affects the SHALLOW copy");
+        System.out.println("Using setValue to change v1 affects the shallow copy");
         vector1.setValue(0, 5);
         System.out.println("v1 is " + vector1);
         System.out.println("Copy of v1 is " + vector1Copy);
+        
+        System.out.println();
+        System.out.println("v2 is " + vector2);
+        MyVector vector2Copy = new MyVector(vector2 ,"");
+        System.out.println("Copy of v2 is " + vector2Copy);
+        System.out.println("Using setValue to change v2[0] does NOT affect the deep copy");
+        vector2.setValue(0, 0);
+        System.out.println("v2 is " + vector2);
+        System.out.println("Copy of v2 is " + vector2Copy);
+        
+        
+        
+        
                
     }
     

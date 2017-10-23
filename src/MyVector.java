@@ -82,11 +82,20 @@ public class MyVector {
         return true;
     }
  
-// d(v,u) = sqrt( (v1-u1)^2 + (v2-u2)^2 + …), 
-// (sqrt : συνάρτηση της τετραγωνικής ρίζας)
-//    public double distance(MyVector otherVector) {
-//
-//    }
+
+    public double distance(MyVector otherVector) {
+        int sum = 0;
+        double distance = 0.0;
+        
+        if (v.length == otherVector.v.length) {
+            for (int i = 0; i < v.length; i++)
+                sum += Math.pow(v[i] - otherVector.v[i], 2);
+            distance = Math.sqrt(sum);
+        }
+        return distance;
+    }
+    
+        
     
     public static void main (String[] args) {
         

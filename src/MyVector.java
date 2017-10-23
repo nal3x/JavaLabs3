@@ -26,36 +26,37 @@ public class MyVector {
     }
     
     public MyVector(MyVector otherVector, String s) { //overloaded DEEP copy constructor
-        label = otherVector.label; //immutability of Strings saves us...
+        label = otherVector.label; //immutability of Strings saves us
         v = new int[otherVector.v.length];
         for (int i = 0; i < v.length; i++) 
-            v[i] = otherVector.v[i];
-        
+            v[i] = otherVector.v[i];      
     }
     
-//
-// θα θέτει νέα ετικέτα label στο τρέχον διάνυσμα 
     public void setLabel(String l) {
+        //no problem if immutable l is manipulated outside the class
         label = l;    
     }
 
 // θα θέτει νέα τιμή value στη θέση index του τρέχοντος διανύσματος 
     public void setValue(int index, int value) {
-        v[index] = value;    
+        v[index] = value;  
+    }
+ 
+    public int getValue(int index) {
+        return v[index];
+    }
+       
+    public int[] getVector() {
+        //simply returning v would break encapsulation...
+        int temp[]=new int[v.length];
+        for (int i=0; i<v.length; i++)
+            temp[i]=v[i];       
+        return temp;  
     }
 
-//// θα επιστρέφει την τιμή της θέσης index του τρέχοντος διανύσματος 
-//    public int getValue(int index) {   
-//    
-//    }
-//       
-//// θα επιστρέφει τον πίνακα με τιμές του τρέχοντος διανύσματος 
-//    public int[] getVector() {
-//    
-//    }
-
     public String getLabel() {
-        return label;
+        //no problem to return the immutable String label        
+        return label; 
     }
        
     public String toString() {
@@ -68,15 +69,19 @@ public class MyVector {
         return s;
     }
         
-//// Θα επιστρέφει true εάν το otherVector έχει ίδιο μήκος, 
-//// τιμές και ετικέτα με το τρέχον διάνυσμα 
-//    public boolean equals(MyVector otherVector) {
-//    
-//    }
-                
-// Θα επιστρέφει την Ευκλείδεια απόσταση του τρέχοντος διανύσματος 
-// από ένα άλλο διάνυσμα otherVector. Η ευκλείδεια απόσταση δυο 
-// διανυσμάτων v(v1, v2,…) και u(u1, u2,…) ορίζεται ως 
+// Θα επιστρέφει true εάν το otherVector έχει ίδιο μήκος, 
+// τιμές και ετικέτα με το τρέχον διάνυσμα 
+    public boolean equals(MyVector otherVector) {
+        if (!label.equals(otherVector.label))
+            return false;        
+        if (v.length != otherVector.v.length)
+            return false;
+        for (int i = 0; i < v.length; i++)
+            if (v[i] != otherVector.v[i])
+                return false;
+        return true;
+    }
+ 
 // d(v,u) = sqrt( (v1-u1)^2 + (v2-u2)^2 + …), 
 // (sqrt : συνάρτηση της τετραγωνικής ρίζας)
 //    public double distance(MyVector otherVector) {
@@ -98,7 +103,6 @@ public class MyVector {
         label += "1"; //reminder: strings are immutable
         System.out.println("label becomes " + label);
         System.out.println("v2 is not affected(Strings are immutable) " + vector2);
-        
         
         components[0] = 4;
         System.out.println("components[0] has changed to " + components[0]);
@@ -138,18 +142,12 @@ public class MyVector {
         
         System.out.println();
         System.out.println("v2 is " + vector2);
-        MyVector vector2Copy = new MyVector(vector2 ,"");
+        MyVector vector2Copy = new MyVector(vector2 ,""); //call to second copy constructor
         System.out.println("Copy of v2 is " + vector2Copy);
         System.out.println("Using setValue to change v2[0] does NOT affect the deep copy");
         vector2.setValue(0, 0);
         System.out.println("v2 is " + vector2);
-        System.out.println("Copy of v2 is " + vector2Copy);
-        
-        
-        
-        
+        System.out.println("Copy of v2 is " + vector2Copy);       
                
-    }
-    
-    
+    }   
 }

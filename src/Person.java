@@ -8,6 +8,10 @@ public class Person {
         age=a;
     }
 
+    public void addYear() {
+        age++;
+    }
+    
     public String toString() {
         return name + " " + age; 
     }
@@ -21,4 +25,16 @@ public class Person {
 	persons[2]=new Person("Nikos", 40);
 
         for (int i=0; i < persons.length; i++)
-            System.out.println(persons[i]);  } }
+            System.out.println(persons[i]);  
+        
+        for (int i = 0; i < persons.length; i++) 
+            for (int j = 0; j < 2; j++)
+                persons[i].addYear();  
+        
+        for (int i=0; i < persons.length; i++)
+            System.out.println(persons[i]);
+    
+    } 
+}
+
+

@@ -55,7 +55,7 @@ public class MyVector {
     }
 
     public String getLabel() {
-        //no problem to return the immutable String label        
+        //no problem to return the immutable String l        
         return label; 
     }
        
@@ -102,15 +102,15 @@ public class MyVector {
         MyVector vector1 = new MyVector(2);
         System.out.println("Using first constructor " + vector1);
         
-        String label = new String("v2");
+        String l = new String("v2");
         int[] components = {1,1};
         
-        MyVector vector2 = new MyVector(components, label);
+        MyVector vector2 = new MyVector(components, l);
         System.out.println("Using second constructor " + vector2);  
         
         System.out.println();
-        label += "1"; //reminder: strings are immutable
-        System.out.println("label becomes " + label);
+        l += "1"; //reminder: strings are immutable
+        System.out.println("label becomes " + l);
         System.out.println("v2 is not affected(Strings are immutable) " + vector2);
         
         components[0] = 4;
